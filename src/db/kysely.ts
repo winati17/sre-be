@@ -1,15 +1,14 @@
+import { createPool } from 'mysql2'
 import { Database } from './types' // this is the Database interface we defined earlier
-import { Pool } from 'pg'
-import { Kysely, PostgresDialect } from 'kysely'
+import { Kysely, MysqlDialect } from 'kysely'
 
-const dialect = new PostgresDialect({
-  pool: new Pool({
+const dialect = new MysqlDialect({
+  pool: createPool({
     database: process.env.DATABASE_NAME,
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
-    port: parseInt(process.env.DATABASE_PORT ?? "5432" ),
-    max: 10,
+    port: parseInt(process.env.DATABASE_PORT ?? "3306"),
   })
 })
 
